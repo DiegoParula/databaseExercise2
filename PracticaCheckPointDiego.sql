@@ -133,15 +133,50 @@ p_nombre_cliente varchar(40),
 p_nombre_empleado varchar(10),
 p_apellido_empleado varchar(20),
 p_nombre_compania_correo varchar(40)
+
 ) 
 
 Begin
-	Declare p_nombre_producto varchar(40),
-	Declare p_cantidad_producto smallint,
-	Declare p_nombre_cliente varchar(40),
-	Declare p_nombre_empleado varchar(10),
-	Declare p_apellido_empleado varchar(20),
-	Declare p_nombre_compania_correo varchar(40)
+	Declare v_nombre_producto varchar(40),
+	Declare v_nombre_cliente varchar(40),
+	Declare v_nombre_empleado varchar(10),
+	Declare v_apellido_empleado varchar(20),
+	Declare v_nombre_compania_correo varchar(40),
+    Declare v_ClienteID char(5), 
+    Declare v_EmpleadoID int, 
+    declare v_FechaFactura datetime, 
+    declare v_FechaRegistro datetime, 
+    declare v_FechaEnvio datetime, 
+    declare v_EnvioVia int, 
+    declare v_Transporte double, 
+    declare v_NombreEnvio varchar(40), 
+    declare v_DireccionEnvio varchar(60),
+    declare v_CiudadEnvio varchar(15), 
+    declare v_RegionEnvio varchar(15), 
+    declare v_CodigoPostalEnvio varchar(10), 
+    declare v_PaisEnvio varchar(15),
+    DECLARE error_message VARCHAR(255),
+    declare v_facturaID int,
+    declare v_ProductoID int,
+    declare v_PrecioUnitario double,
+    declare v_descuento double,
+   
+   
+    DECLARE exit handler for sqlexception
+    BEGIN
+        -- Manejo de errores de excepción SQL
+		GET DIAGNOSTICS CONDITION 1 error_message = MESSAGE_TEXT;
+        SELECT CONCAT('Error Message: ', error_message) AS ErrorMessage;
+        
+    END;
+    
+    -- Obtengo el nombre del producto  
+    SELECT p.ProductoNombre INTO v_nombre_producto
+    FROM Productos as p 
+    WHERE p.ProductoNombre = v_productoNombre;
+    
+    --
+    
     
 end;
 
